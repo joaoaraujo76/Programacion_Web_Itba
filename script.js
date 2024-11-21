@@ -48,7 +48,7 @@ let swiper1 = new Swiper(".review-slider", {
     }
 });
 
-// Adicionar o evento de clique para remover comentários usando event delegation
+
 document.querySelector('.swiper.review-slider .swiper-wrapper').addEventListener('click', function(event) {
     if (event.target.classList.contains('remove-comment')) {
         const review = event.target.closest('.swiper-slide');
@@ -105,9 +105,158 @@ document.getElementById('submitReview').addEventListener('click', function() {
         document.getElementById('name').value = '';
         document.querySelectorAll('input[name="rating"]').forEach(input => input.checked = false);
         document.getElementById('comment').value = '';
+        Swal.fire({
+            title: 'Success',
+            text: 'Review submitted successfully',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+        
     } else {
-        alert('Please fill in all fields');
+        Swal.fire({
+            title: 'Error',
+            text: 'Please fill all the fields',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 });
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cartIcon = document.querySelector('.fa-shopping-cart');
+    const cartContainer = document.getElementById('cart');
+
+    cartIcon.addEventListener('click', () => {
+        cartContainer.classList.toggle('hidden');
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.getElementById('cart');
+    const emptyMessage = cartContainer.querySelector('span#empty-card');
+    const totalContainer = document.createElement('div');
+    totalContainer.classList.add('total-price');
+    totalContainer.textContent = 'Total: $0.00';
+    cartContainer.appendChild(totalContainer);
+
+    const checkoutButton = document.createElement('button');
+    checkoutButton.classList.add('checkout-btn');
+    checkoutButton.textContent = 'Confirm Purchase';
+    cartContainer.appendChild(checkoutButton);
+
+    function checkCartEmpty() {
+        const remainingItems = cartContainer.querySelectorAll('.product-item');
+        if (remainingItems.length === 0) {
+            emptyMessage.style.display = 'block';
+            totalContainer.style.display = 'none';
+            checkoutButton.style.display = 'none'; 
+        } else {
+            emptyMessage.style.display = 'none';
+            totalContainer.style.display = 'block';
+            checkoutButton.style.display = 'block'; 
+            cartContainer.appendChild(checkoutButton); 
+        }
+    }
+
+    function updateTotalPrice() {
+        let total = 0;
+        cartContainer.querySelectorAll('.product-item').forEach(item => {
+            const price = parseFloat(item.querySelector('.product-price').textContent.replace('$', ''));
+            total += price;
+        });
+        totalContainer.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    checkoutButton.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Purchase Confirmed',
+            text: 'Thank you for your purchase!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            cartContainer.querySelectorAll('.product-item').forEach(item => item.remove());
+            checkCartEmpty();
+            updateTotalPrice();
+            cartContainer.classList.toggle('hidden');
+        });      
+    });
+
+
+    checkCartEmpty();
+
+    document.querySelectorAll('.box .btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const productBox = button.closest('.box');
+            const productName = productBox.querySelector('h3').textContent;
+            const productImageSrc = productBox.querySelector('img').src;
+            const productPrice = parseFloat(productBox.querySelector('span').textContent.replace('$', ''));
+
+            let existingProduct = Array.from(cartContainer.querySelectorAll('.product-item'))
+                .find(item => item.querySelector('.product-name').textContent === productName);
+
+            if (existingProduct) {
+                let quantitySpan = existingProduct.querySelector('.quantity');
+                let priceSpan = existingProduct.querySelector('.product-price');
+                let originalPrice = parseFloat(existingProduct.dataset.price);
+
+                let quantity = parseInt(quantitySpan.textContent, 10) + 1;
+                quantitySpan.textContent = quantity;
+                priceSpan.textContent = `$${(originalPrice * quantity).toFixed(2)}`;
+            } else {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.setAttribute('data-price', productPrice);
+                productItem.innerHTML = `
+                    <img src="${productImageSrc}" alt="${productName}" class="product-photo">
+                    <div class="product-details">
+                        <p class="product-name">${productName}</p>
+                        <div class="product-quantity">
+                            <button class="quantity-btn">-</button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn">+</button>
+                        </div>
+                    </div>
+                    <span class="product-price">$${productPrice.toFixed(2)}</span>
+                `;
+
+                cartContainer.appendChild(productItem);
+                cartContainer.appendChild(checkoutButton); // Garante que o botão é o último elemento após adicionar um item
+
+                const minusButton = productItem.querySelector('.quantity-btn:first-child');
+                const plusButton = productItem.querySelector('.quantity-btn:last-child');
+                const quantitySpan = productItem.querySelector('.quantity');
+                const priceSpan = productItem.querySelector('.product-price');
+
+                minusButton.addEventListener('click', () => {
+                    let quantity = parseInt(quantitySpan.textContent, 10);
+                    if (quantity > 1) {
+                        quantity -= 1;
+                        quantitySpan.textContent = quantity;
+                        priceSpan.textContent = `$${(productPrice * quantity).toFixed(2)}`;
+                        updateTotalPrice();
+                    } else if (quantity === 1) {
+                        productItem.remove();
+                        checkCartEmpty();
+                        updateTotalPrice();
+                    }
+                });
+
+                plusButton.addEventListener('click', () => {
+                    let quantity = parseInt(quantitySpan.textContent, 10) + 1;
+                    quantitySpan.textContent = quantity;
+                    priceSpan.textContent = `$${(productPrice * quantity).toFixed(2)}`;
+                    updateTotalPrice();
+                });
+            }
+
+            updateTotalPrice();
+            checkCartEmpty();
+        });
+    });
+});
 
