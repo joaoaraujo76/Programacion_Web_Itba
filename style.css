@@ -37,6 +37,7 @@ header {
     box-shadow: var(--box-shadow);
 }
 
+
 section{
     padding: 2rem 9%;
 }
@@ -514,6 +515,7 @@ footer .box-container {
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     gap: 1.5rem;
     padding-left: 3em;
+    background-color: #fff;
 }
 
 footer .box-container .box h3 {
@@ -535,3 +537,102 @@ footer .box-container .box a:hover {
 }
 
 
+.hidden {
+    display: none;
+}
+
+
+
+.cart-container {
+    position: fixed;
+    text-align: center;
+    right: 0rem;
+    top: 6.5rem;
+    width: 30rem;
+    background-color: #fff;
+    border: 1px solid var(--black);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.product-item {
+    border-top: 1px solid var(--black);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.product-photo {
+    background-color: #723232;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-name {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.product-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.quantity-btn {
+    background-color: var(--green);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.product-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+.product-price {
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.total-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.checkout-btn {
+    display: block;
+    margin: 20px auto; /* Adiciona espaço em volta e centraliza o botão */
+    padding: 10px 20px;
+    background-color: #28a745; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.checkout-btn:hover {
+    background-color: #218838; 
+}
