@@ -11,6 +11,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
     <!-- custom css file link -->
      <link rel="stylesheet" href="style.css">
 </head>
@@ -28,11 +31,14 @@
             <i class="fas fa-bars" id="menu-bars"></i>
             <i class="fas fa-search" id="search-icon"></i>
             <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-shopping-cart"></a>
+            <a class="fas fa-shopping-cart"></a>
         </div>
     </header>
-    
 
+    <div id="cart" class="cart-container hidden">
+        <h4 class="sub-heading">Shooping Cart</h4>
+        <span id="empty-card">The cart is empty!</span>
+    </div>
 
     <section class="home" id="home">
         <div class="swiper home-slider">
@@ -42,7 +48,6 @@
                         <span>our special dish</span>
                         <h3>Bacalhau à Brás</h3>
                         <p>Delicie-se com o Bacalhau à Brás, uma combinação perfeita de bacalhau desfiado, batatas fritas finas e ovos, tudo envolvido em temperos tradicionais.</p>
-                        <a href="#" class="btn">order now</a>
                     </div>
                     <div class="image">
                         <img src="images/pizza-nice-removed.png" alt="">
@@ -53,7 +58,6 @@
                         <span>our special dish</span>
                         <h3>Pastéis de Nata</h3>
                         <p>Experimente os autênticos pastéis de nata, um doce icônico de Portugal, com uma base crocante e recheio cremoso de nata</p>
-                        <a href="#" class="btn">order now</a>
                     </div>
                     <div class="image">
                         <img src="images/pizza-nice-removed.png" alt="">
@@ -64,7 +68,6 @@
                         <span>our special dish</span>
                         <h3>Caldo Verde</h3>
                         <p>Aprecie a sopa tradicional portuguesa feita com couve-galega, batatas, azeite e rodelas de chouriço para um sabor autêntico e reconfortante.</p>
-                        <a href="#" class="btn">order now</a>
                     </div>
                     <div class="image">
                         <img src="images/pizza-nice-removed.png" alt="">
@@ -121,7 +124,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
                 <img src="images/pizza-nice-removed.png" alt="">
-                <h3>tasty food</h3>
+                <h3>tasty food 0</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -137,7 +140,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
                 <img src="images/pizza-nice-removed.png" alt="">
-                <h3>tasty food</h3>
+                <h3>tasty food 1</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -154,7 +157,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
                 <img src="images/pizza-nice-removed.png" alt="">
-                <h3>tasty food</h3>
+                <h3>tasty food 2</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -170,7 +173,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
                 <img src="images/pizza-nice-removed.png" alt="">
-                <h3>tasty food</h3>
+                <h3>tasty food 3</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -186,7 +189,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
                 <img src="images/pizza-nice-removed.png" alt="">
-                <h3>tasty food</h3>
+                <h3>tasty food 4</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -201,7 +204,7 @@
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
                 <img src="images/pizza-nice-removed.png" alt="">
-                <h3>tasty food</h3>
+                <h3>tasty food 5</h3>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -370,7 +373,7 @@
     </footer>
        
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src = "script.js"></script>
 </body>
